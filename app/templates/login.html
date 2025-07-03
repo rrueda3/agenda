@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <br>
+    {{ render_form(form, form_type='horizontal', horizontal_columns =('md', 2, 2), render_kw={'autocomplete': 'off'}, button_style='outline-success') }}
+{% endblock %}

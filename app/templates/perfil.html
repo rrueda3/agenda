@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" autocomplete="nope">
+        {{ form.csrf_token() }}
+        <br><br>
+        <p>
+            <label for="name">Nombre de usuario</label>
+            <input type="text" name="name" id="" placeholder="{{name}}" autocomplete="off">
+    
+        <p>
+            {{ render_field(form.submit, button_style='outline-success') }}
+        </p>
+    </form>
+    
+{% endblock %}

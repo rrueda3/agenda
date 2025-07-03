@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Borrar
+{% endblock %}
+
+{% block content %}
+
+    <br><br><br>
+    <h3>Borrar señalamiento {{ render_icon('eraser-fill', size='0.75em') }}</h3>
+    <br>
+    <form action="" method="post" onsubmit="return confirm('¿Está seguro o segura que desea eliminar el señalamiento?')">
+        {{ form.csrf_token() }}
+        <p>
+            {{ render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
+        </p>
+
+        <p>
+            {{ render_field(form.procedimiento, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
+        </p>
+        <p>
+            {{ render_field(form.submit, button_style='outline-success') }}
+        </p>
+    </form>
+    
+{% endblock %}

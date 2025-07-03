@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Señalamientos del día
+{% endblock %}
+
+{% block nav %}
+    {{ super () }}
+{% endblock %}
+
+{% block content %}
+    <br>
+    <h3 style="margin-bottom: 1em;">Listado de lanzamientos {{ render_icon('book', size='0.75em') }}</h3>
+    
+    <br>
+    {{ render_form(form, button_style='outline-success', form_type='horizontal', horizontal_columns=('md', 2, 3), render_kw={'target': 'blank'}) }}
+{% endblock %}
