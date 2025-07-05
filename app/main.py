@@ -3,9 +3,8 @@ from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApunt
 from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime
 from fpdf import FPDF
+import re, os
 
-
-import os
 from flask_login import login_required, current_user
 
 main_bp = Blueprint('main', __name__)
@@ -42,6 +41,10 @@ def apunte ():
         juzgado = request.form['juzgado']
         representante = request.form['representante']
         procedimiento = request.form['procedimiento']
+        if not (re.match('^[1-9]{1}\d+/2\d{3}$', procedimiento)):
+            flash('El formato de procedimiento introducido no es correcto' \
+            '. Debe ser número/año(con 4 dígitos)', 'warning')
+            return redirect(url_for('main.apunte'))
         comisiones = Agenda.query.filter_by(fecha=fecha).all()
         disponibles = []
         for com in comisiones:
@@ -61,9 +64,10 @@ def apunte ():
                     t = 1
                 array_saltos = Turno.query.get(1).salta_turno.strip().split()
                 while str(t) in array_saltos:
-                    t = int(Turno.query.get(1).turno) + 1
-                    array_saltos = array_saltos.pop(0)
-                    saltos = ' '.join(array_saltos) + ' '
+                    t += 1
+                    array_saltos.remove(str(t-1))
+                saltos = ' '.join(array_saltos) + ' '
+                print(Turno.query.get(1).salta_turno)
                 Turno.query.get(1).turno = str(t)
                 Turno.query.get(1).salta_turno = saltos
             db.session.commit()

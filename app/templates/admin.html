@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Administración
+{% endblock %}
+
+{% block content %}
+    <h4>Recuperar contraseñas de usuarios</h4>
+    <br>
+    {{ render_form(form_password, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success')}}
+    <br>
+    <hr>
+    <h4>Rellenar comisiones de la agenda</h4>
+    <br>
+    {{ render_form(form_fill, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success') }}
+{% endblock %}

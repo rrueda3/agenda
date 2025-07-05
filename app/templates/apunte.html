@@ -41,7 +41,7 @@
             {{ render_field(form.representante, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
         </p>
         <p>
-            {{ render_field(form.procedimiento, form_type='horizontal', horizontal_columns=('md', 2, 5), placeholder='n/YYYY') }}
+            {{ render_field(form.procedimiento, form_type='horizontal', horizontal_columns=('md', 2, 5), placeholder='número/año(4 dígitos)') }}
         </p>
         <p> {{ render_field(form.submit, button_style='outline-success') }}</p>
     </form>

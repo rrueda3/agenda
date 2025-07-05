@@ -67,3 +67,13 @@ class PasswordForm(FlaskForm):
 class PageForm(FlaskForm):
     fecha = DateField('Fecha', validators=[DataRequired()])
     submit = SubmitField('Mostrar')
+
+class AdminPasswordForm(FlaskForm):
+    usuario = StringField('Usuario', validators=[DataRequired()])
+    password = PasswordField('Contraseña', validators=[DataRequired()])
+    re_password = PasswordField('Repetir contraseña', validators=[EqualTo('password', 'Las contraseñas no coinciden')])
+    submit = SubmitField('Recuperar contraseña')
+
+class AdminFillForm(FlaskForm):
+    fecha_final = DateField('Rellenar agenda hasta', validators=[DataRequired()])
+    submit = SubmitField('Rellenar')

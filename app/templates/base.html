@@ -25,6 +25,9 @@
             {{ render_nav_item('main.borrar', 'Eliminar lanzamiento') }}
             {{ render_nav_item('main.mostrar_apuntes', 'Listar señalamientos') }}
             {{ render_nav_item('main.pagina', 'Página de Agenda') }}
+            {% if current_user.role == 'admin' %}
+                {{ render_nav_item('admin.admin', 'Admin') }}
+            {% endif %}
         </div>
         <div class="navbar-nav" style="margin-left: auto;">
             {{ render_nav_item('auth.perfil', 'Mi perfil') }}
