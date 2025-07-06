@@ -175,6 +175,10 @@ def pagina():
     form = PageForm()
     if form.validate_on_submit():
         date = datetime.strptime(request.form['fecha'], '%Y-%m-%d')
+        pagina = Agenda.query.filter_by(fecha=date.date()).all()
+        if len(pagina) == 0:
+            flash('La página de esa fecha no está rellena', 'warning')
+            return redirect(url_for('main.pagina'))
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font('Times', 'BU', 14)

@@ -77,3 +77,6 @@ class AdminPasswordForm(FlaskForm):
 class AdminFillForm(FlaskForm):
     fecha_final = DateField('Rellenar agenda hasta', validators=[DataRequired()])
     submit = SubmitField('Rellenar')
+
+class DeletePageForm(FlaskForm):
+    submit = SubmitField('Borrar páginas pasadas')
