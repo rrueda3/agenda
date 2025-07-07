@@ -5,7 +5,6 @@ from .models import db, migrate
 from .auth import auth_bp
 from .admin import admin_bp
 from flask_login import LoginManager
-from flask_wtf.csrf import CSRFProtect
 
 def create_app():
     app = Flask(__name__)
@@ -20,8 +19,7 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.login_message = 'Debe identificarse para acceder a esta página'
     login_manager.init_app(app)
-    csrf = CSRFProtect()
-    csrf.init_app(app)
+    
 
     from .models import Usuario
 
