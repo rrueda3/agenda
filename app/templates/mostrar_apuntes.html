@@ -14,7 +14,7 @@
     
     <br>
     <form action="" method="post" target="_blank">
-        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         <p>
             {{ render_field(form.inicial, form_type='horizontal', horizontal_columns=('md', 2 ,4))}}
         </p>

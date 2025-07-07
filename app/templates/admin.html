@@ -8,7 +8,7 @@
     <h4>Recuperar contraseñas de usuarios</h4>
     <br>
     <form action="" method="post">
-        {{ form_password.hidden_tag() }}
+        {{ form_password.csrf_token }}
         <p>{{ render_field(form_password.usuario, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form_password.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form_password.re_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
@@ -19,7 +19,7 @@
     <h4>Rellenar comisiones de la agenda</h4>
     <br>
     <form action="" method="post">
-        {{ form_fill.csrf_token() }}
+        {{ form_fill.csrf_token }}
         <p>{{ render_field(form_fill.fecha_final, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form_fill.submit, button_style='outline-success') }}</p>
 
@@ -28,7 +28,7 @@
     <hr>
     <h4>Borrar páginas de fecha pasadas</h4>
     <form action="" method="post">
-        {{ form_delete.csrf_token() }}
+        {{ form_delete.csrf_token }}
         <p>{{ render_field(form_delete.submit, button_style='outline-success') }}</p>
     </form>
 {% endblock %}

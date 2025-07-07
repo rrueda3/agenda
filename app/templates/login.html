@@ -9,7 +9,7 @@
     <h4>Autenticación</h4>
     <br>
     <form action="" method="post">
-        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         <p>{{ render_field(form.username, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.submit, button_style='outline-success') }}</p>

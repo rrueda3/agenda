@@ -8,7 +8,7 @@
     <br>
     <h4>Registro</h4>
     <form action="" method="post">
-        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         <p>{{ render_field(form.username, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.repetir_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>

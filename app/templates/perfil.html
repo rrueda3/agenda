@@ -6,7 +6,7 @@
 
 {% block content %}
     <form action="" method="post" autocomplete="nope">
-        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
         <br><br>
         <p>
             <label for="name">Nombre de usuario</label>
