@@ -5,3 +5,5 @@ class Config():
     SQLALCHEMY_DATABASE_URI = os.getenv('Database_URL','postgresql://neondb_owner:npg_hDAix4fsk9ZV@ep-empty-sky-a2yjgk3q-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     BOOTSTRAP_BOOTSWATCH_THEME = 'journal'
+    SESSION_COOKIE_SAMESITE = None
+    SESSION_COOKIE_SECURE = True
