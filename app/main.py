@@ -56,20 +56,21 @@ def apunte ():
             apuntado = Apuntes(dia=fecha, comision=comision, juzgado=juzgado, representante=representante, procedimiento= procedimiento)
             no_disponible = db.session.query(Agenda).where(Agenda.comision==comision, Agenda.fecha==datetime.strftime(fecha, '%Y-%m-%d')).all()
             no_disponible[0].disponible = False
-            if comision != Turno.query.get(1).turno:
-                Turno.query.get(1).salta_turno += (comision + ' ')
-            else:
-                t = int(Turno.query.get(1).turno) + 1
-                if t == 8:
-                    t = 1
-                array_saltos = Turno.query.get(1).salta_turno.strip().split()
-                while str(t) in array_saltos:
-                    t += 1
-                    array_saltos.remove(str(t-1))
-                saltos = ' '.join(array_saltos) + ' '
-                print(Turno.query.get(1).salta_turno)
-                Turno.query.get(1).turno = str(t)
-                Turno.query.get(1).salta_turno = saltos
+            if turno:
+                if comision != Turno.query.get(1).turno:
+                    Turno.query.get(1).salta_turno += (comision + ' ')
+                else:
+                    t = int(Turno.query.get(1).turno) + 1
+                    if t == 8:
+                        t = 1
+                    array_saltos = Turno.query.get(1).salta_turno.strip().split()
+                    while str(t) in array_saltos:
+                        t += 1
+                        array_saltos.remove(str(t-1))
+                    saltos = ' '.join(array_saltos) + ' '
+                    print(Turno.query.get(1).salta_turno)
+                    Turno.query.get(1).turno = str(t)
+                    Turno.query.get(1).salta_turno = saltos
             db.session.commit()
             db.session.add(apuntado)
             db.session.commit()
