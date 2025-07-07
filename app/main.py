@@ -23,7 +23,7 @@ def index():
 def apunte ():
     form = ApunteForm()
     subform = ComprobarForm()
-    turno = Turno.query.get(1).turno
+    turno = Turno.query.get(1)
     if subform.validate_on_submit():
         data = request.form['fecha']
         comisiones = Agenda.query.filter_by(fecha=data).all()
