@@ -6,6 +6,7 @@
 
 {% block content %}
     <br>
-    <h4>Mostrar una página de la agenda</h4>
+    <h4 style="margin-bottom: 1em;">Mostrar una página de la agenda</h4>
+
     {{ render_form(form, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success', render_kw={'target':'blank'}) }}
 {% endblock %}
