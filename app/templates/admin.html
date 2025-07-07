@@ -8,7 +8,7 @@
     <h4>Recuperar contraseñas de usuarios</h4>
     <br>
     <form action="" method="post">
-        {{ form_password.csrf_token() }}
+        {{ form_password.hidden_tag() }}
         <p>{{ render_field(form_password.usuario, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form_password.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form_password.re_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>

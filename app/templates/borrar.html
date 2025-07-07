@@ -10,7 +10,7 @@
     <h3>Borrar señalamiento {{ render_icon('eraser-fill', size='0.75em') }}</h3>
     <br>
     <form action="" method="post" onsubmit="return confirm('¿Está seguro o segura que desea eliminar el señalamiento?')">
-        {{ form.csrf_token() }}
+        {{ form.hidden_tag() }}
         <p>
             {{ render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
         </p>

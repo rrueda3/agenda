@@ -27,7 +27,7 @@
     <h5 style="display: inline; margin-left: 19em;">Turno: Comision {{ turno }}</h5>
     <br>
     <form action="" method="post">
-        {{ form.csrf_token() }}
+        {{ form.hidden_tag() }}
         <p>
             {{ render_field(form.dia, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
         </p>
