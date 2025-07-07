@@ -194,7 +194,7 @@ def pagina():
         pdf.cell(40, 10, 'Representantes', 1, 1, 'C')
 
         apuntes = Apuntes.query.filter(Apuntes.dia==datetime.strftime(date, '%Y-%m-%d')).all()
-        comisiones = Agenda.query.filter(Agenda.fecha==datetime.strftime(date, '%Y-%m-%d')).all()
+        comisiones = Agenda.query.filter(Agenda.fecha==datetime.strftime(date, '%Y-%m-%d')).order_by('id').all()
         
         com_dia = []
         i = 0
