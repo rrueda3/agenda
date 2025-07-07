@@ -71,7 +71,7 @@ def apunte ():
                 print(Turno.query.get(1).salta_turno)
                 Turno.query.get(1).turno = str(t)
                 Turno.query.get(1).salta_turno = saltos
-            db.session.commit()
+                db.session.commit()
             db.session.add(apuntado)
             db.session.commit()
             flash('Se ha apuntado el lanzamiento', 'success')
