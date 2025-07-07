@@ -37,7 +37,7 @@ class BorrarForm(FlaskForm):
 class MostrarApuntesForm(FlaskForm):
     inicial = DateField('Desde', validators=[DataRequired()])
     final = DateField('Hasta', validators=[DataRequired()])
-    comision = StringField('Mostrar por comisión', render_kw={"placeholder": "Indicar número de comisión"})
+    comision = StringField('Mostrar por comisión', render_kw={"placeholder": "Indicar número"})
     submit = SubmitField('Mostrar')
 
 class LoginForm(FlaskForm):
