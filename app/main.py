@@ -54,8 +54,8 @@ def apunte ():
         
         if comision in disponibles:
             apuntado = Apuntes(dia=fecha, comision=comision, juzgado=juzgado, representante=representante, procedimiento= procedimiento)
-            no_disponible = db.session.query(Agenda).where(Agenda.comision==comision, Agenda.fecha==datetime.strftime(fecha, '%Y-%m-%d')).all()
-            no_disponible[0].disponible = False
+            no_disponible = Agenda.query.filter(Agenda.comision==comision, Agenda.fecha==datetime.strftime(fecha, '%Y-%m-%d')).first()
+            no_disponible .disponible = False
             
             if comision != Turno.query.get(1).turno:
                 Turno.query.get(1).salta_turno += (comision + ' ')
