@@ -13,5 +13,20 @@
     <h3 style="margin-bottom: 1em;">Listado de lanzamientos {{ render_icon('book', size='0.75em') }}</h3>
     
     <br>
-    {{ render_form(form, button_style='outline-success', form_type='horizontal', horizontal_columns=('md', 2, 3), render_kw={'target': 'blank'}) }}
+    <form action="" method="post" target="_blank">
+        {{ form.csrf_token() }}
+        <p>
+            {{ render_field(form.inicial, form_type='horizontal', horizontal_columns=('md', 2 ,2))}}
+        </p>
+        <p>
+            {{ render_field(form.final, form_type='horizontal', horizontal_columns=('md', 2 ,2))}}
+        </p>
+        <p>
+            {{ render_field(form.comision, form_type='horizontal', horizontal_columns=('md', 2 ,2))}}
+        </p>
+        <p>
+            {{ render_field(form.submit, button_style='outline-success')}}
+        </p>
+    </form>
+        
 {% endblock %}

@@ -7,14 +7,28 @@
 {% block content %}
     <h4>Recuperar contraseñas de usuarios</h4>
     <br>
-    {{ render_form(form_password, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success')}}
+    <form action="" method="post">
+        {{ form_password.csrf_token() }}
+        <p>{{ render_field(form_password.usuario, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form_password.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form_password.re_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form_password.submit, button_style='outline-success') }}</p>
+    </form>
     <br>
     <hr>
     <h4>Rellenar comisiones de la agenda</h4>
     <br>
-    {{ render_form(form_fill, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success') }}
+    <form action="" method="post">
+        {{ form_fill.csrf_token() }}
+        <p>{{ render_field(form_fill.fecha_final, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form_fill.submit, button_style='outline-success') }}</p>
+
+    </form>
     <br>
     <hr>
     <h4>Borrar páginas de fecha pasadas</h4>
-    {{ render_form(form_delete, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success') }}
+    <form action="" method="post">
+        {{ form_delete.csrf_token() }}
+        <p>{{ render_field(form_delete.submit, button_style='outline-success') }}</p>
+    </form>
 {% endblock %}

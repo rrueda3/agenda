@@ -6,5 +6,12 @@
 
 {% block content %}
     <br>
-    {{ render_form(form, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success') }}
+    <h4>Registro</h4>
+    <form action="" method="post">
+        {{ csrf_token() }}
+        <p>{{ render_field(form.username, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form.repetir_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form.submit, button_style='outline-success') }}</p>
+    </form>
 {% endblock %}

@@ -8,5 +8,9 @@
     <br>
     <h4>Hoja de la agenda</h4>
     <br>
-    {{ render_form(form, form_type='horizontal', horizontal_columns=('md', 2, 2), button_style='outline-success', render_kw={'target':'blank'}) }}
+    <form action="" method="post" target="_blank">
+        {{ form.csrf_token() }}
+        <p>{{ render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{render_field(form.submit, button_style='outline-success') }}</p>
+    </form>
 {% endblock %}
