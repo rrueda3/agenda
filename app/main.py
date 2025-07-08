@@ -2,6 +2,7 @@ from flask import Blueprint, make_response, render_template, request, flash, url
 from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApuntesForm
 from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime, date, timedelta
+from fpdf import FPDF
 import re, os
 
 from flask_login import login_required, current_user
