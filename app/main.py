@@ -1,8 +1,7 @@
 from flask import Blueprint, make_response, render_template, request, flash, url_for, redirect
 from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApuntesForm
 from .models import db, Apuntes, Agenda, Turno
-from datetime import datetime
-from fpdf import FPDF
+from datetime import datetime, date, timedelta
 import re, os
 
 from flask_login import login_required, current_user
@@ -26,12 +25,17 @@ def apunte ():
     turno = Turno.query.get(1).turno
     if subform.validate_on_submit():
         data = request.form['fecha']
-        comisiones = Agenda.query.filter_by(fecha=data).all()
-        disponibles = []
-        for com in comisiones:
-             if com.disponible:
-                  disponibles.append(com.comision)
-        flash('Comisiones disponibles: ' + str(disponibles), 'info')
+        turno = Turno.query.get(1).turno
+        inicial = (datetime.strptime(data, '%Y-%m-%d')).date() - timedelta(days=5)
+        final = (datetime.strptime(data, '%Y-%m-%d')).date() + timedelta(days=5)
+        disponibilidades =Agenda.query.filter(Agenda.fecha >= inicial,
+                            Agenda.fecha <= final, Agenda.comision==turno, Agenda.disponible==True).all()
+        fechas_disponibles = []
+        for disponible in disponibilidades:
+            fechas_disponibles.append(datetime.strftime(disponible.fecha, '%d-%m-%Y'))
+             
+        flash('Fechas disponibles para la comisión ' 
+              + turno + ':' + ' ' + str(fechas_disponibles), 'info')
         if datetime.strptime(data, '%Y-%m-%d').isoweekday() == 5:
             flash('Atención, este día es VIERNES', 'warning')
 
@@ -40,11 +44,6 @@ def apunte ():
         comision = request.form['comision']
         juzgado = request.form['juzgado']
         representante = request.form['representante']
-        procedimiento = request.form['procedimiento']
-        if not (re.match('^[1-9]{1}\d+/2\d{3}$', procedimiento)):
-            flash('El formato de procedimiento introducido no es correcto' \
-            '. Debe ser número/año(con 4 dígitos)', 'warning')
-            return redirect(url_for('main.apunte'))
         comisiones = Agenda.query.filter_by(fecha=fecha).all()
         disponibles = []
         for com in comisiones:

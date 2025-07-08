@@ -12,7 +12,7 @@
 {% block content %}
 
     <br>
-    <h3>Comprobación de comisiones disponibles {{ render_icon('info-circle-fill', size='0.75em') }}</h3>
+    <h3>Comprobación de fechas disponibles {{ render_icon('info-circle-fill', size='0.75em') }}</h3>
     <br>
     <form action="" method="post">
         {{ subform.csrf_token() }}
@@ -26,7 +26,7 @@
     <h3 style="display: inline;">Anotación {{ render_icon('database-fill-add', size='0.75em') }}</h3>
     <h5 style="display: inline; margin-left: 19em;">Turno: Comision {{ turno }}</h5>
     <br>
-    <form action="" method="post">
+    <form action="" method="post" novalidate>
         {{ form.csrf_token }}
         <p>
             {{ render_field(form.dia, form_type='horizontal', horizontal_columns=('md', 2, 5)) }}
