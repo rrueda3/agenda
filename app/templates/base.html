@@ -25,6 +25,7 @@
             {{ render_nav_item('main.borrar', 'Eliminar lanzamiento') }}
             {{ render_nav_item('main.mostrar_apuntes', 'Listar señalamientos') }}
             {{ render_nav_item('main.pagina', 'Página de Agenda') }}
+            {{ render_nav_item('main.modificar', 'Modificar apunte')}}
             {% if current_user.role == 'admin' %}
                 {{ render_nav_item('admin.admin', 'Admin') }}
             {% endif %}

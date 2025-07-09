@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, render_template, request, flash, url_for, redirect
-from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApuntesForm
+from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApuntesForm, ModificarForm
 from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime, timedelta
 from fpdf import FPDF
@@ -89,6 +89,46 @@ def apunte ():
 
     return render_template('apunte.html', form=form, subform=subform, turno=turno)
 
+
+# Modificar un señalamiento
+
+@main_bp.route('/modificar', methods=['GET', 'POST'])
+def modificar():
+    form = ModificarForm()
+    if form.validate_on_submit():
+        fecha = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
+        comision = request.form['comision']
+        proc = form.bool_proc.data
+        print(proc, '1')
+        juzg = form.bool_juzg.data
+        print(juzg)
+        repr = form.bool_repr.data
+        print(repr)
+        apunte = Apuntes.query.filter(Apuntes.dia==fecha, Apuntes.comision==comision).first()
+
+        print(apunte)
+        if proc:
+            print(proc)
+            procedimiento = request.form['procedimiento']
+            apunte.procedimiento = procedimiento
+        if juzg:
+            print(juzg)
+            juzgado = request.form['juzgado']
+            if juzgado != 'juzgado':
+                apunte.juzgado = juzgado
+        if repr:
+            print(repr)
+            representante = request.form['representante']
+            if representante:
+                apunte.representante = representante
+        db.session.commit()
+        flash('Se han realizado las modificaciones indicadas', 'success')
+        return redirect(url_for('main.index'))
+    return render_template('modificar.html', form=form)
+
+
+# Borrar señalamiento de la agenda
+
 @main_bp.route('/borrar', methods=['GET', 'POST'])
 @login_required
 def borrar():
@@ -110,6 +150,9 @@ def borrar():
             flash('No hay ningún señalamiento para ese día con los datos introducidos', 'error')
         
     return render_template('borrar.html', form=form)
+
+
+# Mostrar todos los señalamientos de fecha a fecha
 
 @main_bp.route('/mostrar_apuntes', methods=['GET','POST'])
 @login_required
@@ -177,6 +220,8 @@ def mostrar_apuntes():
             return response
 
     return render_template('mostrar_apuntes.html', form=form)
+
+# Mostrar una página de la agenda
 
 @main_bp.route('/pagina', methods=['GET', 'POST'])
 @login_required

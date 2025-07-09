@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import DateField,  StringField, PasswordField, SelectField, SubmitField, BooleanField
-from wtforms.validators import InputRequired, Length, EqualTo,Regexp
+from wtforms.validators import InputRequired, Length, EqualTo,Regexp, Optional
 class ApunteForm(FlaskForm):
     dia = DateField('Fecha', format='%Y-%m-%d', validators=[InputRequired(message='Campo obligatorio')])
     comision = SelectField('Comisión', validators=[InputRequired(message='Campo obligatorio')], choices=['comisión',1,2,3,4,5,6,7])
@@ -29,6 +29,33 @@ class ApunteForm(FlaskForm):
 class ComprobarForm(FlaskForm):
     fecha = DateField('Fecha', validators=[InputRequired(message='Campo obligatorio')])
     submit = SubmitField('Comprobar')
+
+
+class ModificarForm(FlaskForm):
+    fecha = DateField('Fecha del señalamiento', validators=[InputRequired()])
+    comision = SelectField('¿Qué comisión?', validators=[InputRequired()], choices=['comision', '1', '2', '3', '4', '5', '6', '7'])
+    bool_proc = BooleanField('Procedimiento', default=False)
+    bool_juzg = BooleanField('Juzgado', default=False)
+    bool_repr = BooleanField('Representante', default=False)
+    procedimiento = StringField('Procedimiento', validators=[Optional(), Regexp('^[1-9]{1}\d+/2\d{3}$',
+                                                            message='El formato debe ser nº/año(4 dígitos)')])
+    juzgado = SelectField('Juzgado',choices=['juzgado',
+                                   'Primera Instancia 1',
+                                   'Primera Instancia 2',
+                                   'Primera Instancia 3',
+                                   'Primera Instancia 4',
+                                   'Primera Instancia 5',
+                                   'Primera Instancia 6',
+                                   'Instrucción 1',
+                                   'Instrucción 2',
+                                   'Instrucción 3',
+                                   'Instrucción 4',
+                                   'Mercantil 1',
+                                   'Mercantil 2'
+                                   ])
+    representante = StringField('Representante')
+    submit = SubmitField('Modificar')
+
 
 class BorrarForm(FlaskForm):
     fecha = DateField('Fecha señalada', validators=[InputRequired()])
