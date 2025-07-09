@@ -110,7 +110,7 @@ def mostrar_apuntes():
         inicial = datetime.strptime(request.form['inicial'], '%Y-%m-%d')
         final = datetime.strptime(request.form['final'], '%Y-%m-%d')
         comision_filtrada = request.form['comision']
-        apuntes = Apuntes.query.filter(Apuntes.dia >= datetime.strftime(inicial, '%Y-%m-%d'), Apuntes.dia <= datetime.strftime(final, '%Y-%m-%d')).all()
+        apuntes = Apuntes.query.filter(Apuntes.dia >= datetime.strftime(inicial, '%Y-%m-%d'), Apuntes.dia <= datetime.strftime(final, '%Y-%m-%d')).order_by(Apuntes.dia).all()
         if not apuntes:
             flash('En esas fechas no figuran señalamientos', 'warning')
         else:
