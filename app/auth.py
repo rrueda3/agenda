@@ -32,6 +32,8 @@ def admin_required(f):
     return wrapper
 
 
+# Registrar nuevo usuario
+
 @auth_bp.route('/registro', methods=['GET', 'POST'])
 @login_required
 @admin_required
@@ -40,16 +42,23 @@ def registro():
     if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
+        role = request.form['role_admin']
+        if role:
+            role = 'admin'
+        else:
+            role = 'user'
         re_password = request.form['repetir_password']
         if password == re_password:
-            nuevo_usuario = Usuario(username=username, password=generate_password_hash(password))
+            nuevo_usuario = Usuario(username=username, password=generate_password_hash(password), role=role)
             db.session.add(nuevo_usuario)
             db.session.commit()
             return redirect(url_for('auth.login'))
         else:
             flash('Las contraseñas no coinciden', 'error')
     return render_template('registro.html', form=form)
-    
+
+
+# Salir
 
 @auth_bp.route('/logout')
 @login_required
@@ -57,6 +66,8 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
+
+# Mostrar perfil de usuario
 
 @auth_bp.route('/perfil', methods=['GET', 'POST'])
 @login_required
@@ -66,6 +77,8 @@ def perfil():
         return redirect(url_for('auth.cambiar_password'))
     return render_template('perfil.html', form=form, name=current_user.username)
 
+
+# Cambiar contraseña
 
 @auth_bp.route('/cambiar_password', methods=['GET', 'POST'])
 @login_required

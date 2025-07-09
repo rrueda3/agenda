@@ -12,6 +12,9 @@ def admin():
     form_password = AdminPasswordForm()
     form_fill = AdminFillForm()
     form_delete = DeletePageForm()
+
+    # Recuperar contraseña usuario
+
     if form_password.validate_on_submit():
         user = request.form['usuario']
         pw = request.form['password']
@@ -19,6 +22,9 @@ def admin():
         db.session.commit()
         flash('Se ha reestablecido la contraseña', 'success')
         return redirect(url_for('main.index'))
+    
+    # Rellenar agenda
+
     if form_fill.validate_on_submit():
         ultima_pagina = Agenda.query.all()[-1]
         fecha_inicial = ultima_pagina.fecha + timedelta(days=1)
@@ -46,6 +52,9 @@ def admin():
             fecha_inicial += timedelta(days=1)
         flash('La agenda se ha rellenado hasta el día ' + datetime.strftime(fecha_final, '%d-%m-%Y'), 'success')
         return redirect(url_for('main.index'))
+    
+    # Borrar páginas pasadas de la agenda
+    
     if form_delete.validate_on_submit():
         paginas = Agenda.query.filter(Agenda.fecha < date.today()).all()
         apuntes = Apuntes.query.filter(Apuntes.dia < date.today()).all()

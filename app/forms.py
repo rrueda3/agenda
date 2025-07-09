@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import DateField,  StringField, PasswordField, SelectField, SubmitField
+from wtforms import DateField,  StringField, PasswordField, SelectField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, EqualTo,Regexp
 class ApunteForm(FlaskForm):
     dia = DateField('Fecha', format='%Y-%m-%d', validators=[InputRequired(message='Campo obligatorio')])
@@ -50,6 +50,7 @@ class RegisterForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[InputRequired(), Length(min=4)])
     password = PasswordField('Contraseña', validators=[InputRequired(),Length(min=8)])
     repetir_password = PasswordField('Repetir contraseña', validators=[InputRequired()])
+    role_admin = BooleanField('Rol_admin?')
     submit = SubmitField('Registro')
 
 
