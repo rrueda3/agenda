@@ -1,11 +1,9 @@
 from flask import Blueprint, make_response, render_template, request, flash, url_for, redirect
 from .forms import ApunteForm, PageForm, ComprobarForm, BorrarForm, MostrarApuntesForm
 from .models import db, Apuntes, Agenda, Turno
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 from fpdf import FPDF
-import re, os
-
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 main_bp = Blueprint('main', __name__)
 
@@ -45,6 +43,7 @@ def apunte ():
         comision = request.form['comision']
         juzgado = request.form['juzgado']
         representante = request.form['representante']
+        procedimiento = request.form['procedimiento']
         comisiones = Agenda.query.filter_by(fecha=fecha).all()
         disponibles = []
         for com in comisiones:
