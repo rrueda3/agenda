@@ -39,9 +39,18 @@ def apunte ():
         for disponible in disponibilidades:
             if disponible.fecha.isoweekday() == 5:
                 continue
-            fechas_disponibles.append(datetime.strftime(disponible.fecha, '%d-%m-%Y'))   
+            fechas_disponibles.append(datetime.strftime(disponible.fecha, '%d-%m-%Y'))
+        
+        representantes = []
+        for fecha in fechas_disponibles:
+            reps = Apuntes.query.filter_by(dia=datetime.strptime(fecha, '%d-%m-%Y')).all()
+            for rep in reps:
+                representantes.append((rep.representante, datetime.strftime(rep.dia, '%d-%m-%Y')))
+
         flash('Fechas disponibles para la comisión ' 
               + turno + ':' + ' ' + str(fechas_disponibles), 'info')
+        if len(representantes) > 0:
+            flash('Atención, los siguientes representantes tienen señalamientos en los días que se indican ' + str(representantes), 'danger')
         if datetime.strptime(data, '%Y-%m-%d').isoweekday() == 5:
             flash('Atención, este día es VIERNES', 'warning')
 
@@ -213,7 +222,7 @@ def mostrar_apuntes():
                         pdf.cell(40, 10, apunte.representante, 0, 1, 'C')
                         pdf.line(20, pdf.get_y(), 200, pdf.get_y())
                 
-            output = pdf.output(dest='S').encode('latin-1')
+            output = pdf.output('respaldo.pdf', dest='S').encode('latin-1')
             response = make_response(output)
             response.headers.set('Content-Type', 'application/pdf')
             response.headers.set('Content-Disposition', 'inline; filename=doc.pdf')
