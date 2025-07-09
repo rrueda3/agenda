@@ -16,12 +16,18 @@ def conectar():
 def index():
     return render_template('index.html')
 
+
+# Apuntar lanzamiento y comprobar días disponibles para la comisión
+
 @main_bp.route('/apunte', methods=['GET', 'POST'])
 @login_required
 def apunte ():
     form = ApunteForm()
     subform = ComprobarForm()
     turno = Turno.query.get(1).turno
+
+    # Comprobar fechas para la comisión de turno
+
     if subform.validate_on_submit():
         data = request.form['fecha']
         turno = Turno.query.get(1).turno
@@ -31,12 +37,15 @@ def apunte ():
                             Agenda.fecha <= final, Agenda.comision==turno, Agenda.disponible==True).all()
         fechas_disponibles = []
         for disponible in disponibilidades:
-            fechas_disponibles.append(datetime.strftime(disponible.fecha, '%d-%m-%Y'))
-             
+            if disponible.fecha.isoweekday() == 5:
+                continue
+            fechas_disponibles.append(datetime.strftime(disponible.fecha, '%d-%m-%Y'))   
         flash('Fechas disponibles para la comisión ' 
               + turno + ':' + ' ' + str(fechas_disponibles), 'info')
         if datetime.strptime(data, '%Y-%m-%d').isoweekday() == 5:
             flash('Atención, este día es VIERNES', 'warning')
+
+    # Apuntar lanzamiento
 
     if form.validate_on_submit():
         fecha = request.form['dia']
