@@ -199,8 +199,8 @@ def pagina():
         pdf.cell(30, 10, 'Comisión', 1, 0, 'C')
         pdf.cell(40, 10, 'Juzgado', 1, 0, 'C')
         pdf.cell(40, 10, 'Procedimiento', 1, 0, 'C')
-        pdf.cell(40, 10, 'Representantes', 1, 1, 'C')
-
+        pdf.cell(40, 10, 'Representante', 1, 1, 'C')
+      
         apuntes = Apuntes.query.filter(Apuntes.dia==datetime.strftime(date, '%Y-%m-%d')).all()
         comisiones = Agenda.query.filter(Agenda.fecha==datetime.strftime(date, '%Y-%m-%d')).order_by('id').all()
         
@@ -212,14 +212,13 @@ def pagina():
             pdf.cell(20) 
             if  len(apuntes) > i and comision.comision in com_dia:
                 pdf.cell(30, 10, comision.comision, 0, 0, 'C')
-                pdf.cell(40, 10, apuntes[i].juzgado, 0, 0, 'C')
-                pdf.cell(40, 10, apuntes[i].procedimiento, 0, 0, 'C')
-                pdf.cell(40, 10, apuntes[i].representante, 0, 1, 'C')
+                pdf.cell(40, 10, apuntes[com_dia.index(comision.comision)].juzgado, 0, 0, 'C')
+                pdf.cell(40, 10, apuntes[com_dia.index(comision.comision)].procedimiento, 0, 0, 'C')
+                pdf.cell(40, 10, apuntes[com_dia.index(comision.comision)].representante, 0, 1, 'C')
                 i += 1
             else:
                 pdf.cell(30, 10, comision.comision, 0, 1, 'C')
-            
-                    
+                  
             pdf.line(30, pdf.get_y(), 180, pdf.get_y())
         pdf.ln(10)
         pdf.cell(20)
