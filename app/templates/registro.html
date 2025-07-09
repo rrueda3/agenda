@@ -12,6 +12,7 @@
         <p>{{ render_field(form.username, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.repetir_password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
+        <p>{{ render_field(form.role_admin, form_type='horizontal') }}</p>
         <p>{{ render_field(form.submit, button_style='outline-success') }}</p>
     </form>
 {% endblock %}
