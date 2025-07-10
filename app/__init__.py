@@ -6,7 +6,6 @@ from .auth import auth_bp
 from .admin import admin_bp
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
-from smartflash import SmartFlash
 from flask_toastr import Toastr
 
 def create_app():
