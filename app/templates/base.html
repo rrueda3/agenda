@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+    <style type="text/css">
+            #toast-container.toast-top-center > div {
+                width: 600px !important;
+            }
+            #toast-container > div {
+                opacity: .95 !important;
+                
+            }
+            #toast-container > div:hover {
+                opacity: 1 !important;
+            }
+    </style>
     {% block styles %}
         {{ bootstrap.load_css() }}
     {% endblock %}
