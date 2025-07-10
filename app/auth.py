@@ -43,7 +43,7 @@ def registro():
     if form.validate_on_submit():
         username = request.form['username']
         password = request.form['password']
-        role = request.form['role_admin']
+        role = form.role_admin.data
         if role:
             role = 'admin'
         else:
