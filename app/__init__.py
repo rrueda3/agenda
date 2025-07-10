@@ -23,8 +23,6 @@ def create_app():
     login_manager.init_app(app)
     csrf = CSRFProtect()
     csrf.init_app(app)
-    smartflash = SmartFlash()
-    smartflash.init_app(app)
     toastr = Toastr()
     toastr.init_app(app)
     

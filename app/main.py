@@ -4,7 +4,6 @@ from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime, timedelta
 from fpdf import FPDF
 from flask_login import login_required
-from smartflash import smartflash
 
 main_bp = Blueprint('main', __name__)
 

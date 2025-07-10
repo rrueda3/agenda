@@ -3,7 +3,7 @@ from .forms import AdminPasswordForm, AdminFillForm, DeletePageForm
 from .models import Usuario, db, Agenda, Apuntes
 from werkzeug.security import generate_password_hash
 from datetime import date, timedelta, datetime
-from smartflash import smartflash
+
 
 
 admin_bp = Blueprint('admin', __name__)
