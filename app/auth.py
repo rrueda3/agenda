@@ -53,6 +53,7 @@ def registro():
             nuevo_usuario = Usuario(username=username, password=generate_password_hash(password), role=role)
             db.session.add(nuevo_usuario)
             db.session.commit()
+            flash ('El usuario ha quedado registrado', 'success')
             return redirect(url_for('auth.login'))
         else:
             flash('Las contraseñas no coinciden', 'error')
