@@ -8,6 +8,6 @@ class Config():
     TOASTR_POSITION_CLASS = 'toast-top-center'
     TOASTR_PROGRESS_BAR = 'false'
     TOASTR_OPACITY = 'false'
-    TOASTR_TIMEOUT = 5000000
+    TOASTR_TIMEOUT = 25000
     TOASTR_EXTENDED_TIMEOUT = 0
     
