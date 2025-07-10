@@ -6,6 +6,8 @@ from .auth import auth_bp
 from .admin import admin_bp
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
+from smartflash import SmartFlash
+from flask_toastr import Toastr
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +24,10 @@ def create_app():
     login_manager.init_app(app)
     csrf = CSRFProtect()
     csrf.init_app(app)
+    smartflash = SmartFlash()
+    smartflash.init_app(app)
+    toastr = Toastr()
+    toastr.init_app(app)
     
 
     from .models import Usuario

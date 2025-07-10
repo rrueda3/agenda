@@ -4,6 +4,7 @@ from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime, timedelta
 from fpdf import FPDF
 from flask_login import login_required
+from smartflash import smartflash
 
 main_bp = Blueprint('main', __name__)
 
@@ -47,10 +48,10 @@ def apunte ():
             for rep in reps:
                 representantes.append((rep.representante, datetime.strftime(rep.dia, '%d-%m-%Y')))
 
-        flash('Fechas disponibles para la comisión ' 
+        flash('Fechas disponibles para la comisión '
               + turno + ':' + ' ' + str(fechas_disponibles), 'info')
         if len(representantes) > 0:
-            flash('Atención, los siguientes representantes tienen señalamientos en los días que se indican ' + str(representantes), 'danger')
+            flash('Atención, los siguientes representantes tienen señalamientos en los días que se indican ' + str(representantes), 'warning')
         if datetime.strptime(data, '%Y-%m-%d').isoweekday() == 5:
             flash('Atención, este día es VIERNES', 'warning')
 
@@ -85,7 +86,6 @@ def apunte ():
                     t += 1
                     array_saltos.remove(str(t-1))
                 saltos = ' '.join(array_saltos) + ' '
-                print(Turno.query.get(1).salta_turno)
                 Turno.query.get(1).turno = str(t)
                 Turno.query.get(1).salta_turno = saltos
                 db.session.commit()
@@ -108,25 +108,17 @@ def modificar():
         fecha = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
         comision = request.form['comision']
         proc = form.bool_proc.data
-        print(proc, '1')
         juzg = form.bool_juzg.data
-        print(juzg)
         repr = form.bool_repr.data
-        print(repr)
         apunte = Apuntes.query.filter(Apuntes.dia==fecha, Apuntes.comision==comision).first()
-
-        print(apunte)
         if proc:
-            print(proc)
             procedimiento = request.form['procedimiento']
             apunte.procedimiento = procedimiento
         if juzg:
-            print(juzg)
             juzgado = request.form['juzgado']
             if juzgado != 'juzgado':
                 apunte.juzgado = juzgado
         if repr:
-            print(repr)
             representante = request.form['representante']
             if representante:
                 apunte.representante = representante

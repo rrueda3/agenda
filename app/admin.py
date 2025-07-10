@@ -3,6 +3,7 @@ from .forms import AdminPasswordForm, AdminFillForm, DeletePageForm
 from .models import Usuario, db, Agenda, Apuntes
 from werkzeug.security import generate_password_hash
 from datetime import date, timedelta, datetime
+from smartflash import smartflash
 
 
 admin_bp = Blueprint('admin', __name__)
@@ -33,7 +34,7 @@ def admin():
             comision = 1
         fecha_final = datetime.strptime(request.form['fecha_final'], '%Y-%m-%d')
         if fecha_final.date() <= ultima_pagina.fecha:
-            flash('La fecha final debe ser posterior a ' + datetime.strftime(ultima_pagina.fecha, '%d-%m-%Y'))
+            flash('La fecha final debe ser posterior a ' + datetime.strftime(ultima_pagina.fecha, '%d-%m-%Y'), 'warning')
             return redirect(url_for('admin.admin'))
         if fecha_final.date() > ultima_pagina.fecha + timedelta(days=365):
             flash('Sólo se permite rellenar hasta un máximo de un año desde la última página rellena ('

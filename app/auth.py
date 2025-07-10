@@ -3,6 +3,7 @@ from .forms import LoginForm, RegisterForm, ProfileForm, PasswordForm
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Usuario, db
 from flask_login import  login_user, login_required, current_user, logout_user
+from smartflash import smartflash
 
 auth_bp = Blueprint('auth', __name__)
 

@@ -6,12 +6,12 @@
 
 {% block content %}
     <br>
-    <h4>Autenticación</h4>
-    <br>
-    <form action="" method="post">
+    <form action="" method="post" class="bg-light shadow-sm border border-top-0 p-3">
+        <h4>Autenticación</h4>
         {{ form.csrf_token }}
         <p>{{ render_field(form.username, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.password, form_type='horizontal', horizontal_columns=('md', 2 ,2)) }}</p>
         <p>{{ render_field(form.submit, button_style='outline-success') }}</p>
+        
     </form>
 {% endblock %}

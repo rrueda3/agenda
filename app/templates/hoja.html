@@ -6,9 +6,10 @@
 
 {% block content %}
     <br>
-    <h4>Hoja de la agenda</h4>
-    <br>
-    <form action="" method="post" target="_blank">
+    
+    <form action="" method="post" class="bg-light shadow-sm p-3 border border-top-0">
+        <h4>Hoja de la agenda</h4>
+        <br>
         {{ form.csrf_token }}
         <p>{{ render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2 ,4)) }}</p>
         <p>{{render_field(form.submit, button_style='outline-success') }}</p>

@@ -10,10 +10,11 @@
 
 {% block content %}
     <br>
-    <h3 style="margin-bottom: 1em;">Listado de lanzamientos {{ render_icon('book', size='0.75em') }}</h3>
     
-    <br>
-    <form action="" method="post" target="_blank">
+    <form action="" method="post" target="_blank" class="bg-light shadow-sm p-3 border border-top-0">
+        <h3 style="margin-bottom: 1em;">Listado de lanzamientos {{ render_icon('book', size='0.75em') }}</h3>
+    
+        <br>
         {{ form.csrf_token }}
         <p>
             {{ render_field(form.inicial, form_type='horizontal', horizontal_columns=('md', 2 ,4))}}

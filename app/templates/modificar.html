@@ -7,8 +7,9 @@
 {% block content %}
     {{ super() }}
     <br>
-    <h5>Indicar fecha y comisión</h5>
-    <form action="" method="post">
+    
+    <form action="" method="post" class="bg-light shadow-sm p-3 border border-top-0">
+        <h5>Indicar fecha y comisión</h5>
         {{ form.csrf_token }}
         <p>{{render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2, 4)) }}</p>
         <p>{{render_field(form.comision, form_type='horizontal', horizontal_columns=('md', 2, 4)) }}</p>
