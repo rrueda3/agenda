@@ -1,6 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import DateField,  StringField, PasswordField, SelectField, SubmitField, BooleanField
-from wtforms.validators import InputRequired, Length, EqualTo,Regexp, Optional
+from wtforms.validators import InputRequired, Length, EqualTo,Regexp, Optional, ValidationError
+from datetime import date, datetime
+
+
+def lt_actual_year(form, field):
+    year = int(field.data.split('/')[1])
+    if  year > date.today().year:
+        raise ValidationError('No es posible que el año del procedimiento sea posterior al actual')
+
+
 class ApunteForm(FlaskForm):
     dia = DateField('Fecha', format='%Y-%m-%d', validators=[InputRequired(message='Campo obligatorio')])
     comision = SelectField('Comisión', validators=[InputRequired(message='Campo obligatorio')], choices=['comisión',1,2,3,4,5,6,7])
@@ -22,7 +31,7 @@ class ApunteForm(FlaskForm):
                           )
     representante = StringField('Representante')
     procedimiento = StringField('Procedimiento', validators=[InputRequired(message='Campo obligatorio'), Regexp('^[1-9]{1}\d+/2\d{3}$',
-                                                            message='El formato debe ser nº/año(4 dígitos)')])
+                                                            message='El formato debe ser nº/año(4 dígitos)'), lt_actual_year])
     submit = SubmitField('Anotar')
 
 

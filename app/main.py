@@ -60,7 +60,7 @@ def apunte ():
         fecha = request.form['dia']
         comision = request.form['comision']
         juzgado = request.form['juzgado']
-        representante = request.form['representante']
+        representante = request.form['representante'].title()
         procedimiento = request.form['procedimiento']
         comisiones = Agenda.query.filter_by(fecha=fecha).all()
         disponibles = []
