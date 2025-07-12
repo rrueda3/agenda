@@ -8,6 +8,10 @@ def lt_actual_year(form, field):
     year = int(field.data.split('/')[1])
     if  year > date.today().year:
         raise ValidationError('No es posible que el año del procedimiento sea posterior al actual')
+    
+def interval_error(form, field):
+    if field.data < form.inicial.data:
+        raise ValidationError('El intervalo de fechas no es correcto')
 
 
 class ApunteForm(FlaskForm):
@@ -73,7 +77,7 @@ class BorrarForm(FlaskForm):
 
 class MostrarApuntesForm(FlaskForm):
     inicial = DateField('Desde', validators=[InputRequired()])
-    final = DateField('Hasta', validators=[InputRequired()])
+    final = DateField('Hasta', validators=[InputRequired(), interval_error])
     comision = StringField('Mostrar por comisión', render_kw={"placeholder": "Indicar número"})
     submit = SubmitField('Mostrar')
 

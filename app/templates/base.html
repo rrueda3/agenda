@@ -71,15 +71,25 @@
     </section>
     {{ toastr.include_toastr_js() }}
     {% block scripts %}
+    
         <script>
+        var i = document.createElement('iframe');
+        i.setAttribute('id', 'marco')
+        i.setAttribute('class', 'shadow-lg rounded');
+        i.setAttribute('name','marco');
+        i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 900px; height: 800px;');
+
         mostrarMarco = function() {
-            var i = document.createElement('iframe');
-            i.setAttribute('id', 'marco')
-            i.setAttribute('class', 'shadow-lg rounded');
-            i.setAttribute('name','marco');
-            i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 900px; height: 800px;');
+            if (document.forms['form']['inicial'].value <= document.forms['form']['final'].value){
+                document.getElementById('mostrar').appendChild(i);
+            }
+            else{
+                document.getElementById('form').setAttribute('target', '_self')
+            };
+        }
+
+        mostrarMarcoHoja  = function(){
             document.getElementById('mostrar').appendChild(i);
-            
         }
 
         cerrarIframe = function(){
@@ -88,6 +98,7 @@
         }
 
         </script>
+    
     {% endblock %}
 </body>
 </html>
