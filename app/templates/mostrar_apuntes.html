@@ -10,8 +10,8 @@
 
 {% block content %}
     <br>
-    
-    <form action="" method="post" target="_blank" class="bg-light shadow-sm p-3 border border-top-0">
+    <div id="mostrar">
+    <form action="" method="post" target="marco" class="bg-light p-3 border border-top-0" onsubmit="mostrarMarco()">
         <h3 style="margin-bottom: 1em;">Listado de lanzamientos {{ render_icon('book', size='0.75em') }}</h3>
     
         <br>
@@ -29,5 +29,10 @@
             {{ render_field(form.submit, button_style='outline-success')}}
         </p>
     </form>
-        
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
 {% endblock %}

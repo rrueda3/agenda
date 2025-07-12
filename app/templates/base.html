@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,11 +24,11 @@
     {{ toastr.message() }}
     
 </head>
-<body>
+<body   onclick="cerrarIframe()" style="height: 100%;">
     {% from 'bootstrap5/nav.html' import render_nav_item %}
     {% from 'bootstrap5/form.html' import render_field, render_form %}
     {% from 'bootstrap5/utils.html' import render_messages, render_icon %}
-    <section style="margin-top: 20px;margin-left: 15%; margin-right: 15%;">
+    <section style="margin-top: 20px;margin-left: 15%; margin-right: 15%; height: 100%;">
     <h2 style="color:darkgreen;">Agenda de señalamientos SCPJ de Cádiz</h2>
     <br>
     {% block nav %}
@@ -67,9 +67,27 @@
     {% endblock %}
     
     <br>
-    <hr>
     <p>&copy; 2025 Ramón Rueda Aragón. Todos los derechos reservados</p>
     </section>
     {{ toastr.include_toastr_js() }}
+    {% block scripts %}
+        <script>
+        mostrarMarco = function() {
+            var i = document.createElement('iframe');
+            i.setAttribute('id', 'marco')
+            i.setAttribute('class', 'shadow-lg rounded');
+            i.setAttribute('name','marco');
+            i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 900px; height: 800px;');
+            document.getElementById('mostrar').appendChild(i);
+            
+        }
+
+        cerrarIframe = function(){
+            cont = document.getElementById('marco');
+            cont.remove();
+        }
+
+        </script>
+    {% endblock %}
 </body>
 </html>
