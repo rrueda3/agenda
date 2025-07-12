@@ -72,7 +72,7 @@ def apunte ():
         if comision in disponibles:
             apuntado = Apuntes(dia=fecha, comision=comision, juzgado=juzgado, representante=representante, procedimiento= procedimiento)
             no_disponible = Agenda.query.filter(Agenda.comision==comision, Agenda.fecha==datetime.strftime(fecha, '%Y-%m-%d')).first()
-            no_disponible .disponible = False
+            no_disponible.disponible = False
             
             if comision != Turno.query.get(1).turno:
                 Turno.query.get(1).salta_turno += (comision + ' ')
@@ -227,6 +227,7 @@ def mostrar_apuntes():
 @login_required
 def pagina():
     form = PageForm()
+    ultima = db.session.query(Agenda).order_by(Agenda.fecha.desc()).first().fecha
     if form.validate_on_submit():
         date = datetime.strptime(request.form['fecha'], '%Y-%m-%d')
         pagina = Agenda.query.filter_by(fecha=date.date()).all()
@@ -276,7 +277,7 @@ def pagina():
         response.headers.set('Content-Type', 'application/pdf')
         response.headers.set('Content-Disposition', 'inline; filename=doc.pdf')
         return response
-    return render_template('hoja.html',form=form)
+    return render_template('hoja.html',form=form, ultima=ultima)
 
 
 

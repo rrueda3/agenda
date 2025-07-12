@@ -7,7 +7,7 @@
 {% block content %}
     <br>
     <div id="mostrar">
-    <form name="form" method="post" target="marco" class="bg-light shadow-sm p-3 border border-top-0" onsubmit="mostrarMarcoHoja()">
+    <form name="form" id="form" method="post" target="marco" class="bg-light shadow-sm p-3 border border-top-0" onsubmit="mostrarMarcoHoja()">
         <h4>Hoja de la agenda</h4>
         <br>
         {{ form.csrf_token }}
@@ -20,3 +20,4 @@
 {% block scripts %}
     {{ super() }}
 {% endblock %}
+

@@ -27,7 +27,7 @@ def admin():
     # Rellenar agenda
 
     if form_fill.validate_on_submit():
-        ultima_pagina = Agenda.query.all()[-1]
+        ultima_pagina = db.session.query(Agenda).order_by(Agenda.fecha.desc()).first()
         fecha_inicial = ultima_pagina.fecha + timedelta(days=1)
         comision = int(ultima_pagina.comision) + 1
         if comision == 8:

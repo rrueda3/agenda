@@ -73,6 +73,7 @@
     {% block scripts %}
     
         <script>
+        
         var i = document.createElement('iframe');
         i.setAttribute('id', 'marco')
         i.setAttribute('class', 'shadow-lg rounded');
@@ -80,16 +81,26 @@
         i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 900px; height: 800px;');
 
         mostrarMarco = function() {
+            
             if (document.forms['form']['inicial'].value <= document.forms['form']['final'].value){
                 document.getElementById('mostrar').appendChild(i);
             }
             else{
                 document.getElementById('form').setAttribute('target', '_self')
+                location.reload();
             };
+        
         }
 
         mostrarMarcoHoja  = function(){
-            document.getElementById('mostrar').appendChild(i);
+            
+            if (document.forms['form']['fecha'].value <= "{{ ultima }}"){
+                document.getElementById('mostrar').appendChild(i);
+            }
+            else {
+                document.getElementById('form').setAttribute('target', '_self');
+                location.reload();
+            }
         }
 
         cerrarIframe = function(){
