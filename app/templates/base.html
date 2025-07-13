@@ -7,6 +7,7 @@
     <style type="text/css">
             #toast-container.toast-top-center > div {
                 width: 600px !important;
+                margin-top: 10em;
             }
             #toast-container > div {
                 opacity: .95 !important;
@@ -78,7 +79,7 @@
         i.setAttribute('id', 'marco')
         i.setAttribute('class', 'shadow-lg rounded');
         i.setAttribute('name','marco');
-        i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 900px; height: 800px;');
+        i.setAttribute('style', 'position:fixed; top: 3em; left: 25%; width: 800px; height: 800px;');
 
         mostrarMarco = function() {
             
@@ -86,15 +87,24 @@
                 document.getElementById('mostrar').appendChild(i);
             }
             else{
-                document.getElementById('form').setAttribute('target', '_self')
-                location.reload();
-            };
-        
+                document.getElementById('form').setAttribute('target', '_self');
+                document.getElementById('form').reset(); 
+            }
         }
 
         mostrarMarcoHoja  = function(){
+            day = new Date(document.forms['form']['fecha'].value).getDay();
+            if ( day == 6 | day == 0){
+                var error = document.createElement('span');
+                error.setAttribute('id', 'error');
+                error.setAttribute('style', 'color:red;')
+                error.innerHTML = 'Los sábados y domingos no se consideran';
+                document.getElementById('form').appendChild(error)
+                document.getElementById('form').setAttribute('target', '_self')
+                return false
+            }
             
-            if (document.forms['form']['fecha'].value <= "{{ ultima }}"){
+            else if (document.forms['form']['fecha'].value <= "{{ ultima }}"){
                 document.getElementById('mostrar').appendChild(i);
             }
             else {
