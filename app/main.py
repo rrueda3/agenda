@@ -4,6 +4,7 @@ from .models import db, Apuntes, Agenda, Turno
 from datetime import datetime, timedelta
 from fpdf import FPDF
 from flask_login import login_required
+from .auth import admin_required
 
 main_bp = Blueprint('main', __name__)
 
@@ -101,6 +102,7 @@ def apunte ():
 # Modificar un señalamiento
 
 @main_bp.route('/modificar', methods=['GET', 'POST'])
+@admin_required
 def modificar():
     form = ModificarForm()
     if form.validate_on_submit():
