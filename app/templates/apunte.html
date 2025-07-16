@@ -12,6 +12,7 @@
 {% block content %}
 
     <br>
+    <div class="card card-body">
     <form action="" method="post" class="bg-light shadow-sm  p-3 border border-top-0">
         <h3>Comprobación de fechas disponibles {{ render_icon('info-circle-fill', size='0.75em') }}</h3>
         <br>
@@ -19,7 +20,7 @@
         {{ render_field(subform.fecha, form_type='horizontal', horizontal_columns=('md', 2, 5))}}
         {{ render_field(subform.submit, button_style='outline-success') }}
     </form>
-    
+   
     <br>
     <article class="bg-light shadow-sm p-3 border border-top-0">
     <h3 style="display: inline;">Anotación {{ render_icon('database-fill-add', size='0.75em') }}</h3>
@@ -44,8 +45,8 @@
         </p>
         <p> {{ render_field(form.submit, button_style='outline-success') }}</p>
     </form>
-    
-    </article>   
+    </article>
+    </div>  
 {% endblock %}
 
 {% block messages %}

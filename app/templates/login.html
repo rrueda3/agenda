@@ -9,6 +9,7 @@
 
 {% block content %}
     <br>
+    <div class="card card-body">
     <form action="" method="post" class="bg-light shadow-sm border border-top-0 p-3">
         <h4>Autenticación</h4>
         {{ form.csrf_token }}
@@ -17,4 +18,5 @@
         <p>{{ render_field(form.submit, button_style='outline-success') }}</p>
         
     </form>
+    </div> 
 {% endblock %}

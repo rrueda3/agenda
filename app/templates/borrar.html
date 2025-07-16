@@ -7,7 +7,7 @@
 {% block content %}
 
     <br><br><br>
-   
+    <div class="card card-body">
     <form action="" method="post" class="bg-light shadow-sm p-3  border border-top-0" onsubmit="return confirm('¿Está seguro o segura que desea eliminar el señalamiento?')">
         <h3>Borrar señalamiento {{ render_icon('eraser-fill', size='0.75em') }}</h3>
         <br>
@@ -23,5 +23,5 @@
             {{ render_field(form.submit, button_style='outline-success') }}
         </p>
     </form>
-    
+    </div>
 {% endblock %}

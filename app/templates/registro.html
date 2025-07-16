@@ -6,7 +6,7 @@
 
 {% block content %}
     <br>
-    
+    <div class="card card-body">
     <form action="" method="post" class="bg-light shado-sm p-3 border border-top-0">
         <h4>Registro</h4>
         <br>
@@ -17,4 +17,5 @@
         <p>{{ render_field(form.role_admin, form_type='horizontal') }}</p>
         <p>{{ render_field(form.submit, button_style='outline-success') }}</p>
     </form>
+    </div>
 {% endblock %}

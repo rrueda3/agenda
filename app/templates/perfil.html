@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="card card-body">
     <form action="" method="post" autocomplete="nope" class="bg-light shado-sm p-3 border border-top-0">
         {{ form.csrf_token }}
         <br><br>
@@ -15,6 +16,8 @@
         <p>
             {{ render_field(form.submit, button_style='outline-success') }}
         </p>
+   
     </form>
+</div>
     
 {% endblock %}

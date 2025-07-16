@@ -7,6 +7,7 @@
 {% block content %}
     
     <br>
+    <div class="card card-body">
     <form action="" method="post" class="bg-light shadow-sm p-3 border border-top-0">
         <h4>Recuperar contraseñas de usuarios</h4>
         {{ form_password.csrf_token }}
@@ -29,4 +30,5 @@
         {{ form_delete.csrf_token }}
         <p>{{ render_field(form_delete.submit, button_style='outline-success') }}</p>
     </form>
+    </div>
 {% endblock %}

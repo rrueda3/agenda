@@ -102,7 +102,7 @@ def apunte ():
 # Modificar un señalamiento
 
 @main_bp.route('/modificar', methods=['GET', 'POST'])
-@admin_required
+@login_required
 def modificar():
     form = ModificarForm()
     if form.validate_on_submit():
