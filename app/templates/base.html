@@ -30,7 +30,7 @@
     {% from 'bootstrap5/form.html' import render_field, render_form %}
     {% from 'bootstrap5/utils.html' import render_messages, render_icon %}
     <section style="margin-top: 20px;margin-left: 15%; margin-right: 15%; height: 100%;">
-    <h2 style="color:darkgreen;">Agenda de señalamientos SCPJ de Cádiz</h2>
+    <h1 style="color:darkgreen;">Agenda de señalamientos SCPJ de Cádiz</h1>
     <br>
     {% block nav %}
     
@@ -74,7 +74,6 @@
     {% block scripts %}
     
         <script>
-        
         var i = document.createElement('iframe');
         i.setAttribute('id', 'marco')
         i.setAttribute('class', 'shadow-lg rounded');
@@ -105,7 +104,7 @@
             }
             
             else if (document.forms['form']['fecha'].value <= "{{ ultima }}"){
-                document.getElementById('mostrar').appendChild(i);
+                document.getElementById('mostrar').appendChild(i)
             }
             else {
                 document.getElementById('form').setAttribute('target', '_self');
