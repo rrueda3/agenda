@@ -85,7 +85,12 @@
         mostrarMarco = function() {
             
             if (document.forms['form']['inicial'].value <= document.forms['form']['final'].value){
-                document.getElementById('mostrar').appendChild(i);
+                if (window.innerHeight <= 1200){
+                    document.getElementById('form').setAttribute('target', '_blank');
+                }
+                else{
+                    document.getElementById('mostrar').appendChild(i);
+                }
             }
             else{
                 document.getElementById('form').setAttribute('target', '_self');
