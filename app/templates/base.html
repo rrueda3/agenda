@@ -85,7 +85,7 @@
         mostrarMarco = function() {
             
             if (document.forms['form']['inicial'].value <= document.forms['form']['final'].value){
-                if (window.innerHeight <= 1200){
+                if (window.innerWidth <= 700){
                     document.getElementById('form').setAttribute('target', '_blank');
                 }
                 else{
@@ -111,7 +111,7 @@
             }
             
             else if (document.forms['form']['fecha'].value <= "{{ ultima }}"){
-                if (window.innerHeight <= 1200){
+                if (window.innerWidth <= 700){
                     document.getElementById('form').setAttribute('target', '_blank');
                 }
                 else{
