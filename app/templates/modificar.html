@@ -12,6 +12,7 @@
         <h5>Indicar fecha y comisión</h5>
         {{ form.csrf_token }}
         <p>{{render_field(form.fecha, form_type='horizontal', horizontal_columns=('md', 2, 4)) }}</p>
+        <p>{{ render_field(form.comprobar, button_style='outline-success') }}</p>
         <p>{{render_field(form.comision, form_type='horizontal', horizontal_columns=('md', 2, 4)) }}</p>
         <h5>Señalar modificaciones</h5>
         <p>{{render_field(form.bool_proc, form_type='horizontal') }}</p>

@@ -46,7 +46,8 @@ class ComprobarForm(FlaskForm):
 
 class ModificarForm(FlaskForm):
     fecha = DateField('Fecha del señalamiento', validators=[InputRequired()])
-    comision = SelectField('¿Qué comisión?', validators=[InputRequired()], choices=['comision', '1', '2', '3', '4', '5', '6', '7'])
+    comprobar = SubmitField('Comprobar')
+    comision = SelectField('¿Qué comisión?', choices=['', '1', '2', '3', '4', '5', '6', '7'])
     bool_proc = BooleanField('Procedimiento', default=False)
     bool_juzg = BooleanField('Juzgado', default=False)
     bool_repr = BooleanField('Representante', default=False)

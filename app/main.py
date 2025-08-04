@@ -107,25 +107,36 @@ def modificar():
     form = ModificarForm()
     if form.validate_on_submit():
         fecha = datetime.strptime(request.form['fecha'], '%Y-%m-%d').date()
+        apuntes = Apuntes.query.filter_by(dia = fecha).all()
+        if apuntes:
+            for ap in apuntes:
+                flash('Comision: ' + ap.comision + '----' + '----' + ap.procedimiento + '----' + ap.juzgado )
         comision = request.form['comision']
         proc = form.bool_proc.data
         juzg = form.bool_juzg.data
         repr = form.bool_repr.data
         apunte = Apuntes.query.filter(Apuntes.dia==fecha, Apuntes.comision==comision).first()
-        if proc:
-            procedimiento = request.form['procedimiento']
-            apunte.procedimiento = procedimiento
-        if juzg:
-            juzgado = request.form['juzgado']
-            if juzgado != 'juzgado':
-                apunte.juzgado = juzgado
-        if repr:
-            representante = request.form['representante']
-            if representante:
-                apunte.representante = representante
-        db.session.commit()
-        flash('Se han realizado las modificaciones indicadas', 'success')
-        return redirect(url_for('main.index'))
+        if apunte:
+            if proc:
+                procedimiento = request.form['procedimiento']
+                apunte.procedimiento = procedimiento
+            if juzg:
+                juzgado = request.form['juzgado']
+                if juzgado != 'juzgado':
+                    apunte.juzgado = juzgado
+            if repr:
+                representante = request.form['representante']
+                if representante:
+                    apunte.representante = representante
+            if proc or juzg or repr:
+                db.session.commit()
+                flash('Se han realizado las modificaciones indicadas', 'success')
+            else: 
+                flash('No se ha interesado ninguna modificación', 'error')
+            return redirect(url_for('main.index'))
+        else:
+            flash('No existe señalamiento alguno con los datos introducidos', 'error')
+            return redirect(url_for('main.modificar'))
     return render_template('modificar.html', form=form)
 
 
